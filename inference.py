@@ -9,8 +9,8 @@ import pandas as pd
 import joblib
 from pathlib import Path
 
-MODEL_PATH   = Path("models/best_model.pkl")
-FEATURE_PATH = Path("models/feature_names.pkl")
+MODEL_PATH   = Path("best_model.pkl")
+FEATURE_PATH = Path("feature_names.pkl")
 
 
 # ── Clinical risk tier definitions ──────────────────────────────────────────
