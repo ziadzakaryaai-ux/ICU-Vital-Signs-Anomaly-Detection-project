@@ -56,15 +56,15 @@ def load_model():
 
 @st.cache_data
 def load_predictions():
-    return pd.read_csv("outputs/predictions.csv")
+    return pd.read_csv("predictions.csv")
 
 @st.cache_data
 def load_raw():
-    return pd.read_csv("data/icu_vitals_raw.csv")
+    return pd.read_csv("icu_vitals_raw.csv")
 
 @st.cache_data
 def load_metrics():
-    with open("models/metrics.json") as f:
+    with open("metrics.json") as f:
         return json.load(f)
 
 predictor   = load_model()
@@ -197,7 +197,7 @@ if view_mode == "Patient Monitor":
     # ── Feature contribution table ──────────────────────────────────────────
     st.markdown("### Top Risk Contributing Features")
 
-    feat_imp = pd.read_csv("outputs/feature_importances.csv", index_col=0)
+    feat_imp = pd.read_csv("feature_importances.csv", index_col=0)
     feat_imp.columns = ["importance"]
     feat_names_top = feat_imp.head(15).index.tolist()
 
@@ -308,7 +308,7 @@ elif view_mode == "Model Performance":
     c5.metric("F1 Score",  f"{m['f1']:.3f}")
 
     st.markdown("---")
-    st.image("outputs/evaluation_report.png", use_container_width=True)
+    st.image("evaluation_report.png", use_container_width=True)
 
     st.markdown("### Why these metrics matter clinically")
     st.markdown("""
@@ -320,3 +320,4 @@ elif view_mode == "Model Performance":
     | **AUPRC** | More informative than AUROC under class imbalance (only ~28% deteriorate). |
     | **Classification threshold = 0.32** | Deliberately lowered from 0.5 to increase recall — in ICU, a missed deterioration is far more costly than a false alarm. |
     """)
+
